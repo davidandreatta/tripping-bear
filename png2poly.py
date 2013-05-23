@@ -87,7 +87,7 @@ for arg in sys.argv[1:]:
 		elif opt in ("-i"):
 			inFileKMZ = arg
 			try:
-				f = open(arg, 'r')
+				f = open(os.path.abspath(arg), 'r')
 			except IOError:
 				print 'File non presente\nUsage: png2poly.py -i <Kmz input file>'
 				sys.exit()	
@@ -95,7 +95,7 @@ for arg in sys.argv[1:]:
 #####################################################################################################
 
 curDir = commands.getoutput('pwd')
-inFileKMZ = inFileKMZ.rstrip('.kmz')	
+inFileKMZ = os.path.basename(os.path.abspath(inFileKMZ)).rstrip('.kmz')	
 inFileKML = os.path.join(curDir,inFileKMZ,'doc.kml')
 pngDir = os.path.join(curDir,inFileKMZ,'files')
 
