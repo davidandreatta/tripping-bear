@@ -51,8 +51,8 @@ def check_dir(dir):
 # Extracting KMZ
 
 def xtrctKMZ (dir,fname):
-		z = zipfile.ZipFile(os.path.join(dir,fname))
-		z.extractall(os.path.join(dir,fname.rstrip('.kmz')))
+		z = zipfile.ZipFile(fname)
+		z.extractall(os.path.join(dir,os.path.basename(fname).rstrip('.kmz')))
 
 
 #####################################################################################################
@@ -95,6 +95,7 @@ for arg in sys.argv[1:]:
 #####################################################################################################
 
 curDir = commands.getoutput('pwd')
+inFilePath = os.path.abspath(inFileKMZ)
 inFileKMZ = os.path.basename(os.path.abspath(inFileKMZ)).rstrip('.kmz')	
 inFileKML = os.path.join(curDir,inFileKMZ,'doc.kml')
 pngDir = os.path.join(curDir,inFileKMZ,'files')
@@ -105,10 +106,10 @@ outDirKml = os.path.join(curDir,inFileKMZ,'output','kml')
 check_dir(os.path.join(curDir,inFileKMZ))
 check_dir(outDir)
 check_dir(outDirKml)
-inFileKMZ = inFileKMZ + '.kmz'
+
 
 # Extracting KMZ
-xtrctKMZ(curDir,inFileKMZ)
+xtrctKMZ(curDir,inFilePath)
 
 
 # Parsing KML file, extracting array coordinates (north,south,east,west)
@@ -140,7 +141,7 @@ for node in dom1.getElementsByTagName('href'):
 		img.append(z)
 
 while i < len(img):
-	im = Image.open(os.path.join(curDir,inFileKMZ.rstrip('.kmz'),img[i]))
+	im = Image.open(os.path.join(curDir,inFileKMZ,img[i]))
 	xsize = im.size[0]
 	ysize = im.size[1]
 	result = re.search('files/(.*).png', img[i])

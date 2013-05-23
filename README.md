@@ -4,7 +4,7 @@ png2poly converts single *.KMZ in multiple KML with polygons
 
 Usage: png2poly.py -i KMZ_INPUT_FILE
 
-KMZ_INPUT_FILE : name of the kmz file (place in the same directory of the executable) 
+KMZ_INPUT_FILE : name of the kmz file 
 
 The program gives the following output:
 
