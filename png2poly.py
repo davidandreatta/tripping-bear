@@ -85,7 +85,12 @@ for arg in sys.argv[1:]:
 			print 'Usage: png2poly.py -i <Kmz input file>'
 			sys.exit()
 		elif opt in ("-i"):
-			inFileKMZ = arg		
+			inFileKMZ = arg
+			try:
+				f = open(arg, 'r')
+			except IOError:
+				print 'File non presente\nUsage: png2poly.py -i <Kmz input file>'
+				sys.exit()	
 		
 #####################################################################################################
 
